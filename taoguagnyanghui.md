@@ -1,6 +1,64 @@
 # 题型
 
+## 数字排序可能性
+```js
+function permute(n, k) {
+	const result = []
+	const used = new Array(n + 1).fill(false)
+	const path = []
 
+	function dfs (resume) {
+		if (path.length === k) {
+			result.push(path.join('-'))
+			return
+		}
+		
+		for (let j =1; j <= n; j++) {
+			if (used[j]) continue
+			path.push(j)
+			used[j] = true
+			dfs(resume - 1)
+			path.pop()
+			used[j] = false
+		}
+	}
+
+	dfs(k)
+	return result
+}
+
+console.log('%c Evay ', 'background:#222;color:#42b983;padding:2px 6px;border-radius:4px;',
+	permute(4,2)
+);
+```
+
+## 数字集合
+```js
+function permute(n, k) {
+	const result = []
+	const path = []
+
+	function dfs (start) {
+		if (path.length === k) {
+			result.push(path.join('-'))
+			return
+		}
+		for (let i = start; n - i + 1 >= k - path.length; i++) {
+			path.push(i);
+			dfs(i + 1)
+			path.pop()
+		}
+	}
+
+	dfs(1)
+
+	return result
+}
+
+console.log('%c Evay ', 'background:#222;color:#42b983;padding:2px 6px;border-radius:4px;',
+	permute(6,2)
+);
+```
 
 ## 滑动窗口 单调递增/递减序列
 
