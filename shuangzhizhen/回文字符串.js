@@ -17,40 +17,35 @@
 不是回文删两边。
  */
 
-function solve(s) {
-    const n = s.length;
-    const result = [];
-    
-    // 检查子串 s[left..right] 是否为回文
-    const isPalindrome = (left, right) => {
-        while (left < right) {
-            if (s[left] !== s[right]) return false;
-            left++;
-            right--;
-        }
-        return true;
-    };
-    
-    // 双指针找第一处不匹配
-    let left = 0, right = n - 1;
-    while (left < right && s[left] === s[right]) {
-        left++;
-        right--;
+function resolve (s) {
+  const n = s.length
+  function isHuiWen (left, right) {
+    while(left < right) {
+      if(s[left] !== s[right]) return false
+      left++
+      right--
     }
-    
-    // 原字符串是回文：返回中心连续相同字符的所有索引
-    if (left >= right) {
-        const mid = Math.floor(n / 2);
-        let start = mid, end = mid;
-        while (start > 0 && s[start - 1] === s[mid]) start--;
-        while (end < n - 1 && s[end + 1] === s[mid]) end++;
-        for (let i = start; i <= end; i++) result.push(i);
-        return result;
+    return true
+  }
+
+  let left = 0, right = n - 1
+  while(left < right && s[left] === s[right]) {
+    left++;
+    right--
+  }
+  const result = []
+  if (left >= right) { // 原本就是回文字符串
+    const mid = Math.floor(n/2)
+    let start = mid, end = mid;
+    while(start > 0 && s[start - 1] === s[mid] ) start-- // 开端向左扩张
+    while(end < n - 1 && s[end + 1] === s[mid]) end++ // 尾步向右扩张
+    for(; start <= end; start++) {
+      result.push(start) // 每一个与中间相等的索引都可以去掉
     }
-    
-    // 原字符串不是回文：尝试删除 left 或 right
-    if (isPalindrome(left + 1, right)) result.push(left);
-    if (isPalindrome(left, right - 1)) result.push(right);
-    
-    return result;
+    return result
+  }
+
+  if (isHuiWen(left + 1, right)) result.push(left) // 把左边去掉， 剩下的能不能形成回文字符串
+  if (isHuiWen(left, right - 1)) result.push(right) // 把右边去掉， 看剩下的能不能形成回文字符串
+  return result
 }

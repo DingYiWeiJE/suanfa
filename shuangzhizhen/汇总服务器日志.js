@@ -23,24 +23,20 @@
 • 该组路径的平均响应时间(向下取整)
  */
 
-function handle(paths, responseTimes) {
-    const result = [];
-    let i = 0;
-    
-    while (i < paths.length) {
-        let j = i;
-        let sum = 0;
-        
-        // 统计连续相同路径
-        while (j < paths.length && paths[j] === paths[i]) {
-            sum += responseTimes[j];
-            j++;
-        }
-        
-        const count = j - i;
-        result.push([i, count, Math.floor(sum / count)]);
-        i = j;
+function handle (paths, responseTimes) {
+  const result = []
+  let left = 0
+  while(left < paths.length) {
+    let right = left
+    let sum = 0
+    let count = 0
+    while(right < paths.length && paths[right] === paths[left]) {
+      sum += responseTimes[right]
+      count++
+      right++
     }
-    
-    return result;
+    result.push([left, count, Math.floor(sum/count)])
+    left = right
+  }
+  return result
 }
