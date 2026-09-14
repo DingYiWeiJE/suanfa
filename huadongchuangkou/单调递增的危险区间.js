@@ -19,6 +19,15 @@ int\]，长度为5的数组：[最高温度值，最高温度首次出现下标�
 • 下标从 0 开始计数
  */
 
+/**
+找到temperatures中的最大值， 以及最大值的索引
+找到连续k个满足
+  1递增
+  2阈值超过t
+找到最大的阈值对应的起点和终点； 
+统计出现危险的次数
+ */
+
 function analyzeTemperature(temperatures, k, t) {
     const n = temperatures.length;
     
