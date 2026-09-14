@@ -68,7 +68,7 @@ const n = 10
 const mask = new Array(n +  1).fill(0)
 
 for (let i = 0; i <= n; i++) {
-    mask =  1 << (i -1)
+    mask[i] =  1 << (i -1)
 }
 
 console.log(mask) // [ 0,  1,  2,   4,   8, 16, 32, 64, 128, 256, 512 ]

@@ -27,5 +27,5 @@ function controlInstruct(instruct) {
 }
 
 /**
- ^=   相同的是1  不相同的是0； 这样
+ ^=   相同的是0  不相同的是1； 这样
  */
