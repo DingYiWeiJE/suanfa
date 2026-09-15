@@ -1,6 +1,11 @@
 # 题型
 
 ## 数字排序可能性
+
++ **重点一： 在已经知道长度的情况下， 用array来保存used状态**
++ **重点二： 根据长度满足表示函数结束**
++ **重点三：** **path在执行递归之前加入的， 然后在递归函数执行结束之后， 放出， 还有used也是一样在递归之后要回溯**
+
 ```js
 function permute(n, k) {
 	const result = []
@@ -33,6 +38,9 @@ console.log('%c Evay ', 'background:#222;color:#42b983;padding:2px 6px;border-ra
 ```
 
 ## 数字集合
+
++ **这个和上面的不同点在于一个集合里面的元素是无序的， 比方 123 和  321 其实只会记一个； 所以这个的区别是在for循环中， 以i= start； 只会取右边的数**
+
 ```js
 function permute(n, k) {
 	const result = []
@@ -62,12 +70,16 @@ console.log('%c Evay ', 'background:#222;color:#42b983;padding:2px 6px;border-ra
 
 ## 01数组的状态压缩
 
+**通过 1 << i - 1 来设置值** 
+
+**-1的原因是， 在不位移的时候， 它就已经在1位了**
+
 ```js
 const n = 10
 
 const mask = new Array(n +  1).fill(0)
 
-for (let i = 0; i <= n; i++) {
+for (let i = 1; i <= n; i++) {
     mask[i] =  1 << (i -1)
 }
 
