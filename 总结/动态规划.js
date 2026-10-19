@@ -35,3 +35,24 @@ function dp(grid) {
 
   return dp[m - 1][n - 1];
 }
+
+//#region 01背包
+/**
+这道题的绝妙是。 用背包空间作为下标签； 刚开始的时候， 什么都不放， 所有价值都是0
+然后先放大的， 
+然后再放小的， 放小的时候， 判断放小的之后， 和不放这个小的， 价值更大还是更小， 保留价值大的
+ */
+function knapsack(weights, values, W) {
+  const n = weights.length;
+  const dp = new Array(W + 1).fill(0);
+  for (let i = 0; i < n; i++) { // 注意这里要用倒叙
+    for (let j = W; j >= weights[i]; j--) {
+      // dp[j] 是这个背包容量之前的价值
+      // dp[j - weights[i]] 这是剪掉当前即将放进来的物体的重量， 保证物体可以放进来， 并且放进来之后
+      // 刚好是 j
+      dp[j] = Math.max(dp[j], dp[j - weights[i]] + values[i]);
+    }
+  }
+
+  return dp[W];
+}
